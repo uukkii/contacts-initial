@@ -21,10 +21,10 @@ public class PhoneContacts {
         }
     }
 
-    public static String[] getGroups() {
+    public String[] getGroups() {
         return phonebook.keySet().toArray(new String[0]);
     }
 
-    public static Contact[] getContact(String group) { return phonebook.get(group).toArray(new Contact[0]); }
+    public Contact[] getContact(String group) { return phonebook.get(group).toArray(new Contact[0]); }
 
 }

@@ -70,10 +70,11 @@ public class Main {
 
     public static void showPhonebook() {
         System.out.println("Группы в справочнике: ");
-        String[] arrGroups = PhoneContacts.getGroups();
+        PhoneContacts pc = new PhoneContacts();
+        String[] arrGroups = pc.getGroups();
         for (String group : arrGroups) {
             System.out.println("- " + group + ":");
-            for (Contact contact : PhoneContacts.getContact(group)) {
+            for (Contact contact : pc.getContact(group)) {
                 System.out.println("\tИмя: " + contact.getName() + ", Телефон: " + contact.getNumber());
             }
             System.out.println();
