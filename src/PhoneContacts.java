@@ -1,11 +1,15 @@
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class PhoneContacts {
+public final class PhoneContacts {
 
-    public static HashMap<String, LinkedList<Contact>> phonebook = new HashMap<>();
+    private static HashMap<String, LinkedList<Contact>> phonebook;
 
-    public static void createGroup(String title) {
+    public PhoneContacts() {
+        phonebook = new HashMap<>();
+    }
+
+    public void createGroup(String title) {
         if (!phonebook.containsKey(title)) {
             phonebook.put(title, new LinkedList<>());
         } else {
@@ -13,7 +17,7 @@ public class PhoneContacts {
         }
     }
 
-    public static void addContactToGroup(Contact contact, String[] groups) {
+    public void addContactToGroup(Contact contact, String[] groups) {
         for (String group : groups) {
             if (phonebook.containsKey(group)) {
                 phonebook.get(group).add(contact);

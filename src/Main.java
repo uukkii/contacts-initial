@@ -2,10 +2,11 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static Scanner console = new Scanner(System.in);
-    public static String[] arrayContact = new String[1];
+    private static Scanner console = new Scanner(System.in);
+    private static String equalCheck = "нет";
 
     public static void main(String[] args) {
+        PhoneContacts contacts = new PhoneContacts();
         System.out.println("Добро пожаловать в программу 'Телефонная книга'!");
         loop:
         while (true) {
@@ -17,9 +18,9 @@ public class Main {
                     Или введите '0', чтобы выйти из программы.""");
             int input = console.nextInt();
             switch (input) {
-                case 1 -> addGroup();
-                case 2 -> addContact();
-                case 3 -> showPhonebook();
+                case 1 -> addGroup(contacts);
+                case 2 -> addContact(contacts);
+                case 3 -> showPhonebook(contacts);
                 case 0 -> {
                     System.out.println("Спасибо за использование!");
                     break loop;
@@ -29,52 +30,51 @@ public class Main {
         }
     }
 
-    public static void addGroup() {
-        String emptyLine = console.nextLine();
+    private static void addGroup(PhoneContacts contacs) {
+        console.nextLine();
         while (true) {
             System.out.println("Для добавления новой группы введите ее название.\n" +
                     "Или введите 'нет' для возврата в главное меню.");
-            String title = console.nextLine();
-            if ("нет".equals(title)) {
+            String inputTitle = console.nextLine();
+            if (equalCheck.equals(inputTitle)) {
                 break;
-            } else PhoneContacts.createGroup(title);
+            } else contacs.createGroup(inputTitle);
         }
     }
 
-    public static void addContact() {
-        String emptyLine = console.nextLine();
+   private static void addContact(PhoneContacts contacts) {
+        console.nextLine();
         while (true) {
             System.out.println("Для добавления нового контакта введите его имя и " +
                     "номер телефона через пробел (Пример: Name +7ХХХХХХХХХХ)" +
                     " или 'нет' возврата в главное меню");
             String inputContact = console.nextLine();
-            if ("нет".equals(inputContact)) {
+            if (equalCheck.equals(inputContact)) {
                 break;
             } else {
-                arrayContact = inputContact.split(" ");
+                String[] arrayContact = inputContact.split(" ");
                 String name = arrayContact[0], number = arrayContact[1];
                 Contact newContact = new Contact(name, number);
 
                 System.out.println("Для добавления контакта в группу, введите названия групп через пробел (Пример: Семья Работа)"
                         + " или введите 'нет' для добавления нового контакта");
                 String addToGroup = console.nextLine();
-                if ("нет".equals(addToGroup)) {
+                if (equalCheck.equals(addToGroup)) {
                     break;
                 } else {
                     String[] inputGroups = addToGroup.split(" ");
-                    PhoneContacts.addContactToGroup(newContact, inputGroups);
+                    contacts.addContactToGroup(newContact, inputGroups);
                 }
             }
         }
     }
 
-    public static void showPhonebook() {
+    private static void showPhonebook(PhoneContacts contacts) {
         System.out.println("Группы в справочнике: ");
-        PhoneContacts pc = new PhoneContacts();
-        String[] arrGroups = pc.getGroups();
+        String[] arrGroups = contacts.getGroups();
         for (String group : arrGroups) {
             System.out.println("- " + group + ":");
-            for (Contact contact : pc.getContact(group)) {
+            for (Contact contact : contacts.getContact(group)) {
                 System.out.println("\tИмя: " + contact.getName() + ", Телефон: " + contact.getNumber());
             }
             System.out.println();

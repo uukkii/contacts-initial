@@ -1,4 +1,4 @@
-public class Contact {
+public final class Contact {
 
     private String name;
     private String number;
