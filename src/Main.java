@@ -19,7 +19,7 @@ public class Main {
             switch (input) {
                 case 1 -> addGroup();
                 case 2 -> addContact();
-                case 3 -> PhoneContacts.showContacts();
+                case 3 -> showPhonebook();
                 case 0 -> {
                     System.out.println("Спасибо за использование!");
                     break loop;
@@ -33,7 +33,7 @@ public class Main {
         String emptyLine = console.nextLine();
         while (true) {
             System.out.println("Для добавления новой группы введите ее название.\n" +
-                    "Для продолжения введите 'нет'.");
+                    "Или введите 'нет' для возврата в главное меню.");
             String title = console.nextLine();
             if ("нет".equals(title)) {
                 break;
@@ -65,6 +65,18 @@ public class Main {
                     PhoneContacts.addContactToGroup(newContact, inputGroups);
                 }
             }
+        }
+    }
+
+    public static void showPhonebook() {
+        System.out.println("Группы в справочнике: ");
+        String[] arrGroups = PhoneContacts.getGroups();
+        for (String group : arrGroups) {
+            System.out.println("- " + group + ":");
+            for (Contact contact : PhoneContacts.getContact(group)) {
+                System.out.println("\tИмя: " + contact.getName() + ", Телефон: " + contact.getNumber());
+            }
+            System.out.println();
         }
     }
 }

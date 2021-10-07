@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 public class PhoneContacts {
 
@@ -22,9 +21,10 @@ public class PhoneContacts {
         }
     }
 
-    public static void showContacts() {
-        for (Map.Entry<String, LinkedList<Contact>> entry : phonebook.entrySet()) {
-            System.out.println("Контакты в группе: " + entry.getKey() + "\n" + entry.getValue() + "\n");
-        }
+    public static String[] getGroups() {
+        return phonebook.keySet().toArray(new String[0]);
     }
+
+    public static Contact[] getContact(String group) { return phonebook.get(group).toArray(new Contact[0]); }
+
 }
