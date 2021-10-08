@@ -1,4 +1,4 @@
-public final class Contact {
+public class Contact implements Comparable<Contact> {
 
     private String name;
     private String number;
@@ -27,5 +27,10 @@ public final class Contact {
     @Override
     public String toString() {
         return name + "\t" + number;
+    }
+
+    @Override
+    public int compareTo(Contact contact) {
+        return name.compareTo(contact.getName());
     }
 }
