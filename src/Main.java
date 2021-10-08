@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -24,21 +21,7 @@ public class Main {
             switch (input) {
                 case 1 -> addGroup(contacts);
                 case 2 -> addContact(contacts);
-                case 3 -> {
-                    System.out.println("""
-                            Хотите отсортировать контакты по имени?:\s
-                            1. Да.
-                            2. Нет.
-                            Или введите '0' для возврата в главное меню.""");
-                    int secondInput = console.nextInt();
-                    switch (secondInput) {
-                        case 1 -> showSortedPhonebook(contacts);
-                        case 2 -> showPhonebook(contacts);
-                        case 0 -> {
-                        }
-                        default -> System.out.println(defaultSwitchAnswer);
-                    }
-                }
+                case 3 -> showPhonebook(contacts);
                 case 0 -> {
                     System.out.println("Спасибо за использование!");
                     break loop;
@@ -94,26 +77,6 @@ public class Main {
             System.out.println("- " + group + ":");
             for (Contact contact : contacts.getContact(group)) {
                 System.out.println("\tИмя: " + contact.getName() + ", Телефон: " + contact.getNumber());
-            }
-            System.out.println();
-        }
-    }
-
-    private static void showSortedPhonebook(PhoneContacts contacts) {
-        System.out.println("Группы в справочнике: ");
-
-        String[] arrGroups = contacts.getGroups();
-        for (String group : arrGroups) {
-            System.out.println("- " + group + ":");
-            List<Contact> sortedContacts = new ArrayList<>();
-            for (Contact contact : contacts.getContact(group)) {
-                if (!sortedContacts.contains(contact)) {
-                    sortedContacts.add(contact);
-                }
-            }
-            sortedContacts.sort(Comparator.naturalOrder());
-            for (Contact contactInList : sortedContacts) {
-                System.out.println("\tИмя: " + contactInList.getName() + ", Телефон: " + contactInList.getNumber());
             }
             System.out.println();
         }

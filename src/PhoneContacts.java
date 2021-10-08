@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -20,7 +21,8 @@ public final class PhoneContacts {
     public void addContactToGroup(Contact contact, String[] groups) {
         for (String group : groups) {
             if (phonebook.containsKey(group)) {
-                phonebook.get(group).add(contact);
+                int index = Math.abs(Collections.binarySearch(phonebook.get(group), contact)) - 1;
+                phonebook.get(group).add(index, contact);
             }
         }
     }
